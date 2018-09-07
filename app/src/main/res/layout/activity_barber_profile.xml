@@ -24,6 +24,7 @@
             />
 
         <TextView
+            android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -60,6 +61,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvEmail"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -81,6 +83,7 @@
                     android:layout_height="35dp"  />
 
                 <TextView
+                    android:id="@+id/tvPhone"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -102,6 +105,7 @@
                     android:layout_height="35dp" />
 
                 <TextView
+                    android:id="@+id/tvSex"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -123,6 +127,7 @@
                     android:layout_height="35dp" />
 
                 <TextView
+                    android:id="@+id/tvAge"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -145,6 +150,7 @@
                     android:layout_height="35dp"  />
 
                 <TextView
+                    android:id="@+id/tvCalendar"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

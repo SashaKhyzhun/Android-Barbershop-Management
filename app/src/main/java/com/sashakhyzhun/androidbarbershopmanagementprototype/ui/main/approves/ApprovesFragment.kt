@@ -1,4 +1,4 @@
-package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main
+package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.approves
 
 import android.content.Context
 import android.os.Bundle
