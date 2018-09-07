@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/stat_sys_phone_call"
+                    android:src="@android:drawable/sym_action_email"
                     android:layout_width="50dp"
                     android:layout_height="35dp"  />
 
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/ic_lock_idle_low_battery"
+                    android:src="@android:drawable/sym_action_email"
                     android:layout_width="50dp"
                     android:layout_height="35dp" />
 
@@ -108,7 +108,28 @@
                     android:text="Male" />
             </LinearLayout>
 
-            <!-- #3 -->
+            <!-- #4 -->
+            <LinearLayout
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@android:drawable/sym_action_email"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp" />
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Age" />
+            </LinearLayout>
+
+            <!-- #5 -->
             <LinearLayout
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"

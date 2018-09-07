@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_barber_layout"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginStart="4dp"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/item_barber_profile_image"
+        android:layout_width="65dp"
+        android:layout_height="65dp" />
+
+    <TextView
+        android:id="@+id/item_barber_name"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/item_barber_profile_image"
+        android:layout_toEndOf="@+id/item_barber_profile_image"
+        android:text="TextView"
+        android:textStyle="bold"
+        />
+
+    <!--<TextView-->
+        <!--android:id="@+id/item_barber_text2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginStart="0dp"-->
+        <!--android:layout_toEndOf="@+id/item_barber_profile_image"-->
+        <!--android:layout_below="@+id/item_barber_name"-->
+        <!--android:paddingEnd="8dp"-->
+        <!--android:paddingStart="8dp"-->
+        <!--android:text="Another TextView"-->
+        <!--android:textStyle="normal" />-->
+
+    <TextView
+        android:id="@+id/item_barber_text3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@+id/item_barber_profile_image"
+        android:layout_below="@+id/item_barber_name"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:text="Some very long text for TextView"
+        android:textStyle="normal" />
+
+    <View
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/item_barber_profile_image"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dadada" />
+
+</RelativeLayout>
