@@ -1,12 +1,12 @@
-package com.sashakhyzhun.androidbarbershopmanagementprototype
+package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main
 
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log.i
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import timber.log.Timber
 
 class ApprovesFragment : Fragment() {
