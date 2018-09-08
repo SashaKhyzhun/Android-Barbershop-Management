@@ -1,6 +1,7 @@
 package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.profile
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.TextView
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Barber
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.monthly.MonthlyActivity
 
 class BarberProfileActivity : AppCompatActivity(), BarberExtras {
 
@@ -39,6 +41,9 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         tvSex = findViewById<TextView>(R.id.tvSex)
         tvAge = findViewById<TextView>(R.id.tvAge)
         tvCalendar = findViewById<TextView>(R.id.tvCalendar)
+        tvCalendar.setOnClickListener {
+            startActivity(Intent(this, MonthlyActivity::class.java))
+        }
     }
 
     @SuppressLint("SetTextI18n")

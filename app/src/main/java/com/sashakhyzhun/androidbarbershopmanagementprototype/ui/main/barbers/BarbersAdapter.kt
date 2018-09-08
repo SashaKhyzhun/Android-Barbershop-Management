@@ -10,7 +10,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Barber
-import com.sashakhyzhun.androidbarbershopmanagementprototype.model.User
 
 class BarbersAdapter(
     private val ctx: Context,
@@ -29,7 +28,7 @@ class BarbersAdapter(
     override fun onBindViewHolder(holder: BarbersVH, position: Int) {
         val barber = barbers[position]
 
-        holder.barbarName.text = barber.name
+        holder.barberName.text = barber.name
 
         holder.barberLayout.setOnClickListener {
             callback.onClicked(barber, position)
@@ -40,7 +39,7 @@ class BarbersAdapter(
     class BarbersVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageProfile: ImageView = itemView.findViewById(R.id.item_barber_profile_image)
         val barberLayout: RelativeLayout = itemView.findViewById(R.id.item_barber_layout)
-        val barbarName: TextView = itemView.findViewById(R.id.item_barber_name)
+        val barberName: TextView = itemView.findViewById(R.id.item_barber_name)
         // ...
     }
 
