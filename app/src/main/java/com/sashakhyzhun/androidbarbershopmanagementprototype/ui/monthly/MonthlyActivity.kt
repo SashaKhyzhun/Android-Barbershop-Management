@@ -1,16 +1,19 @@
 package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.monthly
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.marcohc.robotocalendar.RobotoCalendarView
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import java.util.*
 import android.widget.Toast
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.daily.DailyActivity
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import kotlin.collections.ArrayList
 
-class MonthlyActivity : AppCompatActivity(), RobotoCalendarView.RobotoCalendarListener {
+class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.RobotoCalendarListener {
 
     companion object {
         const val oneDay: Long = 24 * 60 * 60 * 1000
@@ -26,10 +29,6 @@ class MonthlyActivity : AppCompatActivity(), RobotoCalendarView.RobotoCalendarLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monthly)
 
-//        currentMonth = getCurrentMonth()
-//        previousMonth = currentMonth?.minus(1) ?: getCurrentMonth(-1)
-//        nextMonth = currentMonth?.plus(1) ?: getCurrentMonth(+1)
-
         calendarView = findViewById(R.id.calendarView)
         calendarView.setDate(today)
         calendarView.setRobotoCalendarListener(this)
@@ -42,7 +41,6 @@ class MonthlyActivity : AppCompatActivity(), RobotoCalendarView.RobotoCalendarLi
 
     private fun loadMonthlyData(): ArrayList<Long> {
         val year = getCurrentYear()
-        //val month = getCurrentMonth(monthOffset)
         val daysInMonth = getDaysInMonth(year, monthIndex)
         val firstDayMillis = getFirstDayOfMonthInMillis(year, monthIndex)
 
@@ -95,6 +93,9 @@ class MonthlyActivity : AppCompatActivity(), RobotoCalendarView.RobotoCalendarLi
 
     override fun onDayClick(date: Date) {
         Toast.makeText(this, "onDayClick: $date", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, DailyActivity::class.java)
+        intent.putExtra(dateKey, date)
+        startActivity(intent)
     }
 
     override fun onDayLongClick(date: Date) {
@@ -102,7 +103,7 @@ class MonthlyActivity : AppCompatActivity(), RobotoCalendarView.RobotoCalendarLi
     }
 
     override fun onLeftButtonClick() {
-        Toast.makeText(this, "onLeftButtonClick!", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "onLeftButtonClick!", Toast.LENGTH_SHORT).show()
         monthIndex -= 1
         val previousMonthData = loadMonthlyData()
         fillCalendar(previousMonthData)
@@ -110,7 +111,7 @@ class MonthlyActivity : AppCompatActivity(), RobotoCalendarView.RobotoCalendarLi
     }
 
     override fun onRightButtonClick() {
-        Toast.makeText(this, "onRightButtonClick!", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "onRightButtonClick!", Toast.LENGTH_SHORT).show()
         monthIndex += 1
         val nextMonthData = loadMonthlyData()
         fillCalendar(nextMonthData)

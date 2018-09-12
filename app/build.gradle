@@ -38,10 +38,12 @@ dependencies {
     // Logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
     // Calendar
-//    implementation 'com.riontech:calendar:1.0'
-//    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
-//    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
     implementation 'com.github.marcohc:robotocalendarview:3.4.1'
+    // Daily View
+    implementation 'com.github.alamkanak:android-week-view:1.2.6'
+    // Calligraphy
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    // ORM
+    implementation 'io.paperdb:paperdb:2.6'
 
 }
