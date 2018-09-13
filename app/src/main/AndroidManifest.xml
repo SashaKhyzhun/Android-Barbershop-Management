@@ -23,7 +23,6 @@
         <activity android:name=".ui.profile.BarberProfileActivity" />
         <activity android:name=".ui.monthly.MonthlyActivity" />
         <activity android:name=".ui.daily.DailyActivity" />
-        <activity android:name=".ui.daily.BasicActivity" />
     </application>
 
 </manifest>

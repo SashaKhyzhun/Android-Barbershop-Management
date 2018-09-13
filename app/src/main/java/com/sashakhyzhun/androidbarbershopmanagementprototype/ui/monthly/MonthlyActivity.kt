@@ -58,7 +58,7 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
 
     private fun fillCalendar(monthlyData: ArrayList<Long>) {
         for (i in 0 until monthlyData.size) {
-            if (i == 9 || i == 14 || i == 19) { continue }
+            if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24) { continue }
             calendarView.markCircleImage1(Date(monthlyData[i]))
         }
     }

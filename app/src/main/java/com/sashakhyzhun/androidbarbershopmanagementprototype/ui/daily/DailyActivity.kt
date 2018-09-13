@@ -7,7 +7,6 @@ import android.widget.Toast
 import com.alamkanak.weekview.MonthLoader
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewEvent
-import com.alamkanak.weekview.WeekViewLoader
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import java.util.*
@@ -19,8 +18,6 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
     private lateinit var extraDate: Date
     private lateinit var calendar: Calendar
     private lateinit var mWeekView: WeekView
-
-    private var events: ArrayList<WeekViewEvent> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,21 +43,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // The week view has infinite scrolling horizontally. We have to provide the events of a
         // month every time the month changes on the week view.
         mWeekView.monthChangeListener = MonthLoader.MonthChangeListener { year, month ->
-            val startTime = Calendar.getInstance()
-            startTime.set(Calendar.HOUR_OF_DAY, 3)
-            startTime.set(Calendar.MINUTE, 0)
-            startTime.set(Calendar.MONTH, month - 1)
-            startTime.set(Calendar.YEAR, year)
-            val endTime = startTime.clone() as Calendar
-            endTime.add(Calendar.HOUR, 4)
-            endTime.set(Calendar.MONTH, month - 1)
-            val event = WeekViewEvent(1, "qwerty", startTime, endTime)
-            event.color = resources.getColor(R.color.event_color_01)
-            events.add(event)
-            mutableListOf()
+            // Populate the week view with some events.
+            getEvents()
         }
-
-
+        
+        // Notify this shit about updates
         mWeekView.notifyDatasetChanged()
 
         // Set long press listener for events.
@@ -77,6 +64,25 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
     }
 
+    /**
+     * @param begin - time in millis
+     * @param end - time in millis
+     */
+    private fun getEvents(): MutableList<out WeekViewEvent> {
+        val weekViewList: MutableList<WeekViewEvent > = mutableListOf()
+
+        val startTime: Calendar = Calendar.getInstance()
+        startTime.time = Date(1536838555000)
+
+        val endTime: Calendar = Calendar.getInstance()
+        endTime.time = (Date(1536842155000))
+
+        val viewEvent = WeekViewEvent(1, "haircut session #1", startTime, endTime)
+        weekViewList.add(viewEvent)
+
+        return weekViewList
+    }
+
 
     override fun onEventClick(event: WeekViewEvent?, eventRect: RectF?) {
         println("onEventClick | event:$event, eventRect:$eventRect")
@@ -86,41 +92,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         println("onEventLongPress | event:$event, eventRect:$eventRect")
     }
 
-    private fun testTas(): List<WeekViewEvent> {
-        val startTime = Calendar.getInstance()
-        startTime.time = Date(1536819683000)
 
-        val endTime = Calendar.getInstance()
-        startTime.time = Date(1537063502000)
 
-        val event = WeekViewEvent(1, "name", startTime, endTime)
-        event.color = resources.getColor(R.color.event_color_01)
-        events.add(event)
-
-        return events
-    }
-
-//    private class DayLoader : WeekViewLoader {
-//
-//        private lateinit var mDayChangeListener: DayChangesListener
-//
-//        override fun toWeekViewPeriodIndex(instance: Calendar?): Double {
-//            return (instance?.timeInMillis!! / (1000.0 * 60 * 60 * 24))
-//        }
-//
-//        override fun onLoad(periodIndex: Int): List<out WeekViewEvent> {
-//            val day = Calendar.getInstance()
-//            day.timeInMillis = ((periodIndex * (1000 * 60 * 60 * 24)).toLong())
-//
-//            return mDayChangeListener.onDayChange(
-//                    day.get(Calendar.YEAR),
-//                    day.get(Calendar.MONTH),
-//                    day.get(Calendar.DAY_OF_MONTH)
-//            )
-//        }
-//        interface DayChangesListener {
-//            fun onDayChange(year: Int, month: Int, dayOfMonth: Int): List<out WeekViewEvent>
-//        }
-//    }
 
 }
