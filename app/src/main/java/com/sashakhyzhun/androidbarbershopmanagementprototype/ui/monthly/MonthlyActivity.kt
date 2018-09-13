@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import com.marcohc.robotocalendar.RobotoCalendarView
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import java.util.*
-import android.widget.Toast
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.daily.DailyActivity
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -24,6 +23,7 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
     private val calendar = Calendar.getInstance()
     private val now = System.currentTimeMillis()
     private val today = Date(now)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +63,7 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
         }
     }
 
+
     private fun getCurrentYear(): Int = calendar.get(Calendar.YEAR)
 
     /**
@@ -73,11 +74,13 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
      */
     private fun getCurrentMonth(offset: Int = 0): Int = calendar.get(Calendar.MONTH) + 1 + offset
 
+
     private fun getDaysInMonth(year: Int, month: Int): Int {
         val calendar = Calendar.getInstance()
         calendar.set(year, month - 1, 12)
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
+
 
     private fun getFirstDayOfMonthInMillis(year: Int, month: Int): Long {
         val cal = GregorianCalendar(year, month - 1, 1)
@@ -86,21 +89,30 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
     }
 
 
+    private fun isMultipleOfFive(date: Date): Boolean {
+        val cal = Calendar.getInstance()
+        cal.time = date //val year = cal.get(Calendar.YEAR); val month = cal.get(Calendar.MONTH)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        return (day == 5 || day == 10 || day == 15 || day == 20 || day == 25)
+    }
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
 
     override fun onDayClick(date: Date) {
-        Toast.makeText(this, "onDayClick: $date", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, DailyActivity::class.java)
         intent.putExtra(dateKey, date)
+        intent.putExtra(freeDayKey, isMultipleOfFive(date))
         startActivity(intent)
     }
 
+
     override fun onDayLongClick(date: Date) {
-        Toast.makeText(this, "onDayLongClick: $date", Toast.LENGTH_SHORT).show()
+
     }
+
 
     override fun onLeftButtonClick() {
         //Toast.makeText(this, "onLeftButtonClick!", Toast.LENGTH_SHORT).show()
@@ -110,14 +122,13 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
 
     }
 
+
     override fun onRightButtonClick() {
         //Toast.makeText(this, "onRightButtonClick!", Toast.LENGTH_SHORT).show()
         monthIndex += 1
         val nextMonthData = loadMonthlyData()
         fillCalendar(nextMonthData)
     }
-
-
 
 
 }
