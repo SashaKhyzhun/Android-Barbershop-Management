@@ -96,6 +96,7 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
         return (day == 5 || day == 10 || day == 15 || day == 20 || day == 25)
     }
 
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }

@@ -45,5 +45,7 @@ dependencies {
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     // ORM
     implementation 'io.paperdb:paperdb:2.6'
+    // Swipe Action
+    implementation 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
 
 }

@@ -25,19 +25,6 @@
         android:textStyle="bold"
         />
 
-    <!--<TextView-->
-        <!--android:id="@+id/item_barber_text2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_marginStart="0dp"-->
-        <!--android:layout_toEndOf="@+id/item_barber_profile_image"-->
-        <!--android:layout_below="@+id/item_barber_name"-->
-        <!--android:paddingEnd="8dp"-->
-        <!--android:paddingStart="8dp"-->
-        <!--android:text="Another TextView"-->
-        <!--android:textStyle="normal" />-->
-
     <TextView
         android:id="@+id/item_barber_text3"
         android:layout_width="match_parent"

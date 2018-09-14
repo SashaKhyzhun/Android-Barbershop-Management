@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
-import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.approves.ApprovesFragment
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.approves.ApprovesFragmentJava
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.barbers.BarbersFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 selectedFragment = BarbersFragment()
             }
             R.id.navigation_approves -> {
-                selectedFragment = ApprovesFragment()
+                selectedFragment = ApprovesFragmentJava()
             }
         }
 

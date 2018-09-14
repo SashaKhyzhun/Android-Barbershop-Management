@@ -36,7 +36,7 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
     private fun setupView() {
         tvImage = findViewById<ImageView>(R.id.profile_image)
         tvName = findViewById<TextView>(R.id.tvName)
-        tvEmail = findViewById<TextView>(R.id.tvEmail)
+        tvEmail = findViewById(R.id.tvEmail)
         tvPhone = findViewById<TextView>(R.id.tvPhone)
         tvSex = findViewById<TextView>(R.id.tvSex)
         tvAge = findViewById<TextView>(R.id.tvAge)

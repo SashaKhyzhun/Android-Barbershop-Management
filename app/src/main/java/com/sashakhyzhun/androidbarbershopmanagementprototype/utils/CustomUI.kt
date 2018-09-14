@@ -25,7 +25,7 @@ object CustomUI {
              *
              */
             title: Int,
-            message: Int,
+            message: String,
             buttonPos: Int,
             buttonNeg: Int,
             editText: EditText?,

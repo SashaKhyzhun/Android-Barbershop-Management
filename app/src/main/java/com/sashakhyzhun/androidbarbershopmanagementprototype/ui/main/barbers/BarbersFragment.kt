@@ -11,10 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
+import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperORM
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Barber
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.profile.BarberProfileActivity
+import io.paperdb.Paper
 import timber.log.Timber
+import java.util.*
 
 
 class BarbersFragment : Fragment(), BarbersOnClick, BarberExtras {
@@ -40,8 +43,6 @@ class BarbersFragment : Fragment(), BarbersOnClick, BarberExtras {
         rvBarber = view.findViewById(R.id.recyclerViewBarbers)
         rvBarber.adapter = adapter
         rvBarber.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-
         return view
     }
 

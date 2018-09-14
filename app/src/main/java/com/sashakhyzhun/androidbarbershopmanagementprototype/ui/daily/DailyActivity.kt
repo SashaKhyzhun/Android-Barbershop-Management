@@ -9,8 +9,10 @@ import com.alamkanak.weekview.MonthLoader
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewEvent
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
+import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperORM
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
+import io.paperdb.Paper
 import java.util.*
 
 open class DailyActivity : AppCompatActivity(), BarberExtras,
@@ -31,10 +33,6 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         extraDate = intent?.extras?.get(dateKey) as Date
         extraIsFreeDay = intent?.extras?.get(freeDayKey) as Boolean
 
-
-
-        println("is busy day: $extraIsFreeDay")
-
         // Initiate calendar
         calendar = Calendar.getInstance()
         // set current day in millis
@@ -44,7 +42,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // Set selected date
         mWeekView.goToDate(calendar)
         // Make out calendar smaller
-        mWeekView.hourHeight = 1
+        mWeekView.hourHeight = 100
         // Disabling horizontal scrolling
         mWeekView.xScrollingSpeed = 0.0F
         // Set an action when any event is clicked.
@@ -62,17 +60,40 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         mWeekView.eventLongPressListener = this
 
         mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener {
-            Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
-            val et = CustomUI.createEditText(ctx, null, R.string.edit_text_hint)
-            CustomUI.createAlertDialog(ctx, R.string.dialog_title, R.string.dialog_message,
-                    R.string.button_confirm, R.string.button_cancel, et) {
-
-                // do it
-            }
+            //Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
         }
 
         mWeekView.emptyViewLongPressListener = WeekView.EmptyViewLongPressListener {
-            Toast.makeText(this, "Long Tap: ${it.time}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Long Tap: ${it.time}", Toast.LENGTH_SHORT).show()
+            //val et = CustomUI.createEditText(ctx, null, R.string.edit_text_hint)
+            it.set(it.get(Calendar.YEAR),
+                    it.get(Calendar.MONTH),
+                    it.get(Calendar.DAY_OF_MONTH),
+                    it.get(Calendar.HOUR_OF_DAY),
+                    0,
+                    0
+            )
+            CustomUI.createAlertDialog(ctx,
+                    R.string.dialog_title,
+                    "Confirm registration from "
+                            + "${it.get(Calendar.HOUR_OF_DAY)}:${it.get(Calendar.MINUTE)}0 till "
+                            + "${it.get(Calendar.HOUR_OF_DAY) +1 }:${it.get(Calendar.MINUTE)}0",
+                    R.string.button_confirm,
+                    R.string.button_cancel, null) {
+
+                // todo:
+                // 1. notification
+                // 2. save timestamp to orm
+                // 3. display this item like for barber
+                PaperORM.storeUserRequest(
+                        name = getRandomName(Random().nextInt(5)),
+                        regDay = it,
+                        startHour = it.get(Calendar.HOUR_OF_DAY),
+                        endHour = it.get(Calendar.HOUR_OF_DAY) + 1
+                )
+
+
+            }
         }
 
 
@@ -125,6 +146,19 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
 
         return weekViewList
+    }
+
+
+    private fun getRandomName(i: Int): String {
+        return when (i) {
+            0 -> "Sarah"
+            1 -> "Bob"
+            2 -> "Michal"
+            3 -> "David"
+            4 -> "Jennifer"
+            5 -> "Liza"
+            else -> ""
+        }
     }
 
 
