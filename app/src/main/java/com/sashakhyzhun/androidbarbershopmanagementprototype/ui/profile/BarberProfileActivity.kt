@@ -54,8 +54,8 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
             tvName.text = barber.name
             tvEmail.text = barber.email
             tvPhone.text = barber.phone
-            tvSex.text = "Sex: ${barber.sex}"
-            tvAge.text = "Age: ${barber.age}"
+            tvSex.text = barber.sex
+            tvAge.text = "${barber.age} y.o."
 
         } catch (ex: Exception) {
             ex.printStackTrace()

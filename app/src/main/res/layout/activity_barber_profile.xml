@@ -17,10 +17,10 @@
 
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_centerInParent="true"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_user"
             />
 
         <TextView
@@ -55,9 +55,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/sym_action_email"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
+                    android:src="@drawable/ic_email"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     />
 
                 <TextView
@@ -65,7 +65,9 @@
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="johny.cash@gmail.com" />
+                    android:text="johny.cash@gmail.com"
+                    android:layout_marginStart="16dp"
+                    />
             </LinearLayout>
 
             <!-- #2 -->
@@ -78,16 +80,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/sym_action_email"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"  />
+                    android:src="@drawable/ic_phone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"  />
 
                 <TextView
                     android:id="@+id/tvPhone"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="+1-541-754-3010" />
+                    android:text="+1-541-754-3010"
+                    android:layout_marginStart="16dp"
+                    />
             </LinearLayout>
 
             <!-- #3 -->
@@ -100,16 +104,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/sym_action_email"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp" />
+                    android:src="@drawable/ic_gender"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
 
                 <TextView
                     android:id="@+id/tvSex"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Male" />
+                    android:text="Male"
+                    android:layout_marginStart="16dp"
+                    />
             </LinearLayout>
 
             <!-- #4 -->
@@ -122,16 +128,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@android:drawable/sym_action_email"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp" />
+                    android:src="@drawable/ic_age"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp" />
 
                 <TextView
                     android:id="@+id/tvAge"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Age" />
+                    android:text="Age"
+                    android:layout_marginStart="16dp"
+                    />
             </LinearLayout>
 
             <!-- #5 -->
@@ -145,16 +153,17 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@android:drawable/ic_menu_my_calendar"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"  />
+                    android:src="@drawable/ic_calendar"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"  />
 
                 <TextView
                     android:id="@+id/tvCalendar"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="see my free days" />
+                    android:text="see my free days"
+                    android:layout_marginStart="16dp"/>
             </LinearLayout>
 
         </LinearLayout>

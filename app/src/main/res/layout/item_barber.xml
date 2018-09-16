@@ -8,7 +8,7 @@
 
     <ImageView
         android:layout_marginStart="4dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_user"
         android:id="@+id/item_barber_profile_image"
         android:layout_width="65dp"
         android:layout_height="65dp" />
@@ -35,7 +35,7 @@
         android:layout_below="@+id/item_barber_name"
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
-        android:text="Some very long text for TextView"
+        android:text="Hello, I'm barber from Chicago"
         android:textStyle="normal" />
 
     <View
