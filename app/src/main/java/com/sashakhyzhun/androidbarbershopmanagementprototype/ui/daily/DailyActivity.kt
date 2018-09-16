@@ -4,12 +4,13 @@ import android.content.Context
 import android.graphics.RectF
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import com.alamkanak.weekview.MonthLoader
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewEvent
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
-import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperORM
+import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperConst
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
 import io.paperdb.Paper
@@ -32,6 +33,8 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
         extraDate = intent?.extras?.get(dateKey) as Date
         extraIsFreeDay = intent?.extras?.get(freeDayKey) as Boolean
+        println("extraDate=$extraDate")
+        println("extraIsFreeDay=$extraIsFreeDay")
 
         // Initiate calendar
         calendar = Calendar.getInstance()
@@ -51,7 +54,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // month every time the month changes on the week view.
         mWeekView.monthChangeListener = MonthLoader.MonthChangeListener { _, _ ->
             // Populate the week view with some events.
-            if (extraIsFreeDay.not()) getEvents() else emptyList()
+            if (extraIsFreeDay.not()) getMockEvents() else getAcceptedEvents()
         }
 
         // Notify this shit about updates
@@ -81,16 +84,14 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                     R.string.button_confirm,
                     R.string.button_cancel, null) {
 
-                // todo:
-                // 1. notification
-                // 2. save timestamp to orm
-                // 3. display this item like for barber
-                PaperORM.storeUserRequest(
-                        name = getRandomName(Random().nextInt(5)),
+                val incomingList: List<IncomingRequest> = arrayListOf(IncomingRequest(
+                        name = getRandomName(Random().nextInt(10)),
                         regDay = it,
                         startHour = it.get(Calendar.HOUR_OF_DAY),
                         endHour = it.get(Calendar.HOUR_OF_DAY) + 1
-                )
+                ))
+
+                Paper.book().write(PaperConst.incomingList, incomingList)
 
 
             }
@@ -99,7 +100,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
     }
 
-    private fun getEvents(): MutableList<out WeekViewEvent> {
+    private fun getMockEvents(): MutableList<out WeekViewEvent> {
         val weekViewList: MutableList<WeekViewEvent > = mutableListOf()
 
         var start = Calendar.getInstance()
@@ -144,19 +145,41 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
         weekViewList.add(WeekViewEvent(4, "haircut session #4", start, end))
 
+        return weekViewList
+    }
+
+    private fun getAcceptedEvents(): MutableList<out WeekViewEvent> {
+        val weekViewList: MutableList<WeekViewEvent > = mutableListOf()
+        val saved: List<AcceptedRequest> = Paper.book().read(PaperConst.acceptedList, arrayListOf())
+        println("saved size: ${saved.size}")
+        saved.forEachIndexed { index, it ->
+            val start = Calendar.getInstance()
+            start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH), it.startHour, 0, 0)
+
+            val end = Calendar.getInstance()
+            end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH), it.endHour, 0, 0)
+
+
+            weekViewList.add((WeekViewEvent(index + 4L, it.name, start, end)))
+        }
 
         return weekViewList
     }
 
-
     private fun getRandomName(i: Int): String {
         return when (i) {
-            0 -> "Sarah"
+            0 -> "Michal"
             1 -> "Bob"
-            2 -> "Michal"
+            2 -> "Sarah"
             3 -> "David"
             4 -> "Jennifer"
             5 -> "Liza"
+            6 -> "Mike"
+            7 -> "Andrew"
+            8 -> "Jessica"
+            9 -> "Olivia"
             else -> ""
         }
     }

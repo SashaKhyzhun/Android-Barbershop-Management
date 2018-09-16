@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
-import com.sashakhyzhun.androidbarbershopmanagementprototype.model.UserRequest
-
-import java.util.ArrayList
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
 
 /**
  * @author SashaKhyzhun
@@ -18,7 +16,7 @@ import java.util.ArrayList
  */
 internal class ApprovesAdapter(
         private val ctx: Context,
-        private val list: List<UserRequest>
+        private val list: List<IncomingRequest>
 ) : RecyclerView.Adapter<ApprovesAdapter.MainViewHolder>() {
 
 

@@ -11,8 +11,10 @@ import android.widget.Toast
 
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
-import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperORM
-import com.sashakhyzhun.androidbarbershopmanagementprototype.model.UserRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperConst
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
+import io.paperdb.Paper
 
 import java.util.ArrayList
 
@@ -25,7 +27,7 @@ import timber.log.Timber
 class ApprovesFragmentJava : Fragment() {
 
     private lateinit var onTouchListener: RecyclerTouchListener
-    private lateinit var requests: ArrayList<UserRequest>
+    private lateinit var requests: ArrayList<IncomingRequest>
     private lateinit var adapter: ApprovesAdapter
     private lateinit var recycler: RecyclerView
 
@@ -39,9 +41,12 @@ class ApprovesFragmentJava : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_approves, container, false)
 
-        val all = PaperORM.getBooksById()
-        println("all size = " + all.size)
-        requests.addAll(all)
+        val incomingList: MutableList<IncomingRequest> = Paper.book().read(PaperConst.incomingList, arrayListOf())
+        val acceptedList: MutableList<AcceptedRequest> = Paper.book().read(PaperConst.acceptedList, arrayListOf())
+
+        println("all incoming size = " + incomingList.size)
+        println("all accepted size = " + acceptedList.size)
+        requests.addAll(incomingList)
 
         adapter = ApprovesAdapter(context!!, requests)
         recycler = view.findViewById(R.id.recyclerViewRequests)
@@ -51,28 +56,38 @@ class ApprovesFragmentJava : Fragment() {
         onTouchListener = RecyclerTouchListener(activity, recycler)
         onTouchListener.setIndependentViews(R.id.rowButton)
                 .setViewsToFade(R.id.rowButton)
-                .setClickable(object : RecyclerTouchListener.OnRowClickListener {
-                    override fun onRowClicked(position: Int) {
-                        Toast.makeText(context, "On Row Clicked", Toast.LENGTH_SHORT).show()
-                    }
-
-                    override fun onIndependentViewClicked(independentViewID: Int, position: Int) {
-                        Toast.makeText(context, "Independent View Clicked", Toast.LENGTH_SHORT).show()
-                    }
-                })
                 .setLongClickable(true) { position -> }
-                .setSwipeOptionViews(R.id.add, R.id.edit, R.id.change)
+                .setSwipeOptionViews(R.id.layout_accept, R.id.layout_cancel)
                 .setSwipeable(R.id.rowFG, R.id.rowBG) { viewID, position ->
                     when (viewID) {
-                        R.id.add -> Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
-                        R.id.edit -> Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show()
-                        R.id.change -> Toast.makeText(context, "Change", Toast.LENGTH_SHORT).show()
+                        R.id.layout_accept -> {
+                            val req = requests[position]
+
+                            acceptedList.add(AcceptedRequest(req.name, req.regDay, req.startHour, req.endHour))
+                            Paper.book().write(PaperConst.acceptedList, acceptedList)
+
+                            incomingList.removeAt(position)
+                            Paper.book().write(PaperConst.incomingList, incomingList)
+
+                            requests.removeAt(position)
+                            updateRV()
+                        }
+                        R.id.layout_cancel -> {
+                            incomingList.removeAt(position)
+                            requests.removeAt(position)
+
+                            updateRV()
+                        }
                     }
                 }
 
         return view
     }
 
+    private fun updateRV() {
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(context)
+    }
 
     override fun onResume() {
         super.onResume()
