@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">Barbershop Management</string>
+
     <string name="title_barbers">Barbers</string>
-    <string name="title_approves">Approves</string>
+    <string name="title_incoming">Incoming</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_empty" />
+
     <string name="edit_text_empty_text" />
     <string name="edit_text_hint">Leave some message if you want</string>
+
     <string name="dialog_title">Confirmation</string>
     <string name="dialog_message">Please, confirm your request</string>
-    <string name="title_empty" />
+
     <string name="button_confirm">Confirm</string>
     <string name="button_cancel">Cancel</string>
+
 </resources>

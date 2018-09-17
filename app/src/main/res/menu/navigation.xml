@@ -9,6 +9,6 @@
     <item
         android:id="@+id/navigation_approves"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_approves" />
+        android:title="@string/title_incoming" />
 
 </menu>
