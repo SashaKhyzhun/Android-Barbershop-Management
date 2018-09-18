@@ -50,7 +50,7 @@ public class HairDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         data = getIntent().getParcelableArrayListExtra("data");
         pos = getIntent().getIntExtra("pos", 0);

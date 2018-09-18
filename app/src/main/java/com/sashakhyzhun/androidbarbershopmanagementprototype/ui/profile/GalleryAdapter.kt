@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Hair
 import java.util.*
+
+
 
 /**
  * @author SashaKhyzhun
@@ -30,12 +31,16 @@ class GalleryAdapter constructor(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        Glide.with(ctx).load(data[position].url)
-                .thumbnail(0.5f)
-//                .override(200, 200)
+        val resID = ctx.resources.getIdentifier(data[position].name, "drawable", ctx.packageName)
+        (holder as HairItemHolder).hairImage.setImageResource(resID)
+
+//        Glide.with(ctx).load(data[position].url)
+//                .thumbnail(0.5f)
+//                .apply(RequestOptions().override(200, 200))
 //                .crossFade()
 //                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into((holder as HairItemHolder).hairImage)
+//                .into((holder as HairItemHolder).hairImage)
+
 
     }
 
