@@ -8,13 +8,18 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Barber
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Hair
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.monthly.MonthlyActivity
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.profile.hairdetail.HairDetailActivity
+import org.jetbrains.anko.backgroundDrawable
 import org.jetbrains.anko.email
 import org.jetbrains.anko.makeCall
 import kotlin.collections.ArrayList
@@ -56,8 +61,8 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_barber_profile)
-        setupView()
         retrieveExtras()
+        setupView()
 
         println("hairs = $hairs")
 
@@ -89,7 +94,12 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
 
 
     private fun setupView() {
+        val background = findViewById<RelativeLayout>(R.id.layout_background)
+        background.backgroundDrawable = applicationContext.getDrawable(R.drawable.background)
+
         tvImage = findViewById<ImageView>(R.id.profile_image)
+        Glide.with(this).load(barber.profileImage).apply(RequestOptions().circleCrop()).into(tvImage)
+
         tvName = findViewById<TextView>(R.id.tvName)
         tvEmail = findViewById(R.id.tvEmail)
         tvEmail.setOnClickListener {
