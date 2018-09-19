@@ -5,18 +5,18 @@ import android.os.Parcelable
 
 
 class Barber(
-        var profileImage: String = "",
-        var name: String = "",
-        var email: String = "",
-        var phone: String = "",
-        var sex: String = "",
-        var age: String = ""
+        var profileImage: Int,
+        var name: String,
+        var email: String,
+        var phone: String,
+        var sex: String,
+        var age: String
         //var calendar: Calendar
 ) : Parcelable {
 
 
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
+            parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -25,7 +25,7 @@ class Barber(
     )
 
     override fun writeToParcel(p0: Parcel?, p1: Int) {
-        p0?.writeString(profileImage)
+        p0?.writeInt(profileImage)
         p0?.writeString(name)
         p0?.writeString(email)
         p0?.writeString(phone)

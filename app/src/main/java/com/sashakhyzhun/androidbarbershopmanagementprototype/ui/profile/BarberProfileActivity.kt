@@ -15,6 +15,8 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Hair
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.monthly.MonthlyActivity
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.profile.hairdetail.HairDetailActivity
+import org.jetbrains.anko.email
+import org.jetbrains.anko.makeCall
 import kotlin.collections.ArrayList
 
 class BarberProfileActivity : AppCompatActivity(), BarberExtras {
@@ -90,7 +92,15 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         tvImage = findViewById<ImageView>(R.id.profile_image)
         tvName = findViewById<TextView>(R.id.tvName)
         tvEmail = findViewById(R.id.tvEmail)
+        tvEmail.setOnClickListener {
+            email(tvEmail.text.toString(),
+                    "Haircut Request",
+                    "Hello, I want to change my hairstyle")
+        }
         tvPhone = findViewById<TextView>(R.id.tvPhone)
+        tvPhone.setOnClickListener {
+            makeCall(tvPhone.text.toString())
+        }
         tvSex = findViewById<TextView>(R.id.tvSex)
         tvAge = findViewById<TextView>(R.id.tvAge)
         tvCalendar = findViewById<TextView>(R.id.tvCalendar)
@@ -101,7 +111,8 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
 
     @SuppressLint("SetTextI18n")
     private fun retrieveExtras() {
-        barber = intent?.extras?.getParcelable(barberKey) ?: Barber()
+        barber = intent?.extras?.getParcelable(barberKey)
+                ?: Barber(0, "", "", "", "", "")
         try {
             //tvImage. = barber.profileImage
             tvName.text = barber.name

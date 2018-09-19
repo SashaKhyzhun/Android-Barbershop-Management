@@ -35,6 +35,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
+    // Anko
+    implementation 'org.jetbrains.anko:anko:0.10.6'
+    implementation 'org.jetbrains.anko:anko-appcompat-v7-commons:0.10.6'
     // Logger
     implementation 'com.jakewharton.timber:timber:4.7.1'
     // Calendar

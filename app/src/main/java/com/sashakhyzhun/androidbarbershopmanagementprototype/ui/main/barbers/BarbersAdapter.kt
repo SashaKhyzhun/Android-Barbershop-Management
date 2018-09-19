@@ -1,5 +1,6 @@
 package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.barbers
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Barber
 
@@ -25,11 +28,17 @@ class BarbersAdapter(
     override fun getItemCount(): Int = barbers.size
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: BarbersVH, position: Int) {
         val barber = barbers[position]
 
-        holder.barberName.text = barber.name
+        Glide.with(ctx)
+                .load(barber.profileImage)
+                .apply(RequestOptions().circleCrop())
+                .into(holder.imageProfile)
 
+        holder.mainText.text = barber.name
+        holder.subText.text = "Hello, I'm ${barber.age}, my phone is ${barber.phone}"
         holder.barberLayout.setOnClickListener {
             callback.onClicked(barber, position)
         }
@@ -38,9 +47,9 @@ class BarbersAdapter(
 
     class BarbersVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageProfile: ImageView = itemView.findViewById(R.id.item_barber_profile_image)
+        val mainText: TextView = itemView.findViewById(R.id.item_barber_name)
+        val subText: TextView = itemView.findViewById(R.id.item_barber_text3)
         val barberLayout: RelativeLayout = itemView.findViewById(R.id.item_barber_layout)
-        val barberName: TextView = itemView.findViewById(R.id.item_barber_name)
-        // ...
     }
 
 
