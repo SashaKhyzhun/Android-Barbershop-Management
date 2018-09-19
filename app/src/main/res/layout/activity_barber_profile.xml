@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/barber_profile_layout"
-    android:layout_weight="100"
+    android:weightSum="100"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight="40">
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:orientation="vertical">
+
 
         <RelativeLayout
             android:id="@+id/layout_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#1e67ab">
+            android:background="#1e67ab"
+            android:paddingBottom="32dp"
+            android:paddingTop="32dp">
 
             <ImageView
                 android:id="@+id/profile_image"
@@ -45,13 +47,11 @@
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/layout_background"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="4dp">
+            android:paddingTop="8dp">
 
             <ImageView
                 android:layout_width="30dp"
@@ -72,8 +72,6 @@
             android:id="@+id/layout_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/layout_email"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
@@ -99,8 +97,6 @@
             android:id="@+id/layout_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/layout_phone"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
@@ -126,8 +122,6 @@
             android:id="@+id/layout_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/layout_gender"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
@@ -153,8 +147,6 @@
             android:id="@+id/layout_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/layout_age"
             android:orientation="horizontal"
             android:paddingBottom="4dp"
             android:paddingEnd="16dp"
@@ -172,23 +164,29 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:gravity="center_vertical"
-                android:text="see my free days" />
+                android:text="Calendar" />
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerHairs"
+
+    <LinearLayout
+        android:layout_weight="40"
         android:layout_width="match_parent"
-        android:layout_height="257dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="0dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerHairs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
 
 
 
 
 
 
-</RelativeLayout>
+
+</LinearLayout>
