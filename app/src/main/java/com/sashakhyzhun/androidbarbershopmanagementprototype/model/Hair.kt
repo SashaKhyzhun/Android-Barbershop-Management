@@ -7,15 +7,15 @@ import android.os.Parcelable
  * @author SashaKhyzhun
  * Created on 9/18/18.
  */
-data class Hair(var name: String, var url: String) : Parcelable {
+data class Hair(var name: String, var resId: Int) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readString())
+            parcel.readInt())
 
     override fun writeToParcel(p0: Parcel, p1: Int) {
         p0.writeString(name)
-        p0.writeString(url)
+        p0.writeInt(resId)
     }
 
     override fun describeContents(): Int = 0

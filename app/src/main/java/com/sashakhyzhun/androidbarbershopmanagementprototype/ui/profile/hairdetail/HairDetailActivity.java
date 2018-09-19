@@ -1,6 +1,9 @@
 package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.profile.hairdetail;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -37,7 +40,7 @@ public class HairDetailActivity extends AppCompatActivity {
     public ArrayList<Hair> data = new ArrayList<>();
     int pos;
 
-    Toolbar toolbar;
+    //Toolbar toolbar;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -49,13 +52,14 @@ public class HairDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         //setSupportActionBar(toolbar);
+
 
         data = getIntent().getParcelableArrayListExtra("data");
         pos = getIntent().getIntExtra("pos", 0);
 
-        setTitle(data.get(pos).getName());
+        //setTitle(data.get(pos).getName());
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -69,26 +73,18 @@ public class HairDetailActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
 
             @Override
-            public void onPageSelected(int position) {
-
-                //noinspection ConstantConditions
-                setTitle(data.get(position).getName());
-
-            }
+            public void onPageSelected(int position) { /*setTitle(data.get(position).getName());*/ }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) { }
         });
 
 
     }
+
 
 //
 //    @Override
@@ -119,7 +115,8 @@ public class HairDetailActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-        public ArrayList<Hair> data = new ArrayList<>();
+
+        public ArrayList<Hair> data;
 
         public SectionsPagerAdapter(FragmentManager fm, ArrayList<Hair> data) {
             super(fm);
@@ -130,7 +127,7 @@ public class HairDetailActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position, data.get(position).getName(), data.get(position).getUrl());
+            return PlaceholderFragment.newInstance(position, data);
         }
 
         @Override
@@ -154,30 +151,34 @@ public class HairDetailActivity extends AppCompatActivity {
          * fragment.
          */
 
-        String name, url;
+//        String name, url;
         int pos;
+        private ArrayList<Hair> data;
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_IMG_TITLE = "image_title";
         private static final String ARG_IMG_URL = "image_url";
+        private static final String ARG_HAIR_RES_ID = "hair_resources";
 
         @Override
         public void setArguments(Bundle args) {
             super.setArguments(args);
             this.pos = args.getInt(ARG_SECTION_NUMBER);
-            this.name = args.getString(ARG_IMG_TITLE);
-            this.url = args.getString(ARG_IMG_URL);
+//            this.name = args.getString(ARG_IMG_TITLE);
+//            this.url = args.getString(ARG_IMG_URL);
+            this.data = args.getParcelableArrayList(ARG_HAIR_RES_ID);
         }
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber, String name, String url) {
+        public static PlaceholderFragment newInstance(int sectionNumber, ArrayList<Hair> data) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            args.putString(ARG_IMG_TITLE, name);
-            args.putString(ARG_IMG_URL, url);
+//            args.putString(ARG_IMG_TITLE, name);
+//            args.putInt(ARG_IMG_URL, url);
+            args.putParcelableArrayList(ARG_HAIR_RES_ID, data);
             fragment.setArguments(args);
             return fragment;
         }
@@ -192,13 +193,14 @@ public class HairDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_hair_detail, container, false);
 
-            final ImageView imageView = (ImageView) rootView.findViewById(R.id.detail_image);
-
-            Glide.with(getActivity()).load(url).thumbnail(0.1f).into(imageView);
+            final ImageView imageView = rootView.findViewById(R.id.detail_image);
+            imageView.setBackgroundColor(Color.BLACK);
+            int image = data.get(pos).getResId();
+            Glide.with(this).load(image).thumbnail(0.1f).into(imageView);
 
             return rootView;
         }

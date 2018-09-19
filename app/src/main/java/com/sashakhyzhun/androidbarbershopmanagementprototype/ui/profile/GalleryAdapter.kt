@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.Hair
@@ -30,18 +32,9 @@ class GalleryAdapter constructor(
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-        val resID = ctx.resources.getIdentifier(data[position].name, "drawable", ctx.packageName)
-        (holder as HairItemHolder).hairImage.setImageResource(resID)
-
-//        Glide.with(ctx).load(data[position].url)
-//                .thumbnail(0.5f)
-//                .apply(RequestOptions().override(200, 200))
-//                .crossFade()
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into((holder as HairItemHolder).hairImage)
-
-
+        Glide.with(ctx).load(data[position].resId)
+                .thumbnail(0.5f)
+                .into((holder as HairItemHolder).hairImage)
     }
 
     internal class HairItemHolder(val view: View) : RecyclerView.ViewHolder(view) {

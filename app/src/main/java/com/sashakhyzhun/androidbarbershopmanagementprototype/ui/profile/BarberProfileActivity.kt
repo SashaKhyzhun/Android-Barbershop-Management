@@ -31,7 +31,20 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
     private lateinit var rvHairs: RecyclerView
 
 
-    private lateinit var hairs: List<String>
+    private val hairs: List<Int> = arrayListOf(
+            R.drawable.hair_example_1,
+            R.drawable.hair_example_2,
+            R.drawable.hair_example_3,
+            R.drawable.hair_example_4,
+            R.drawable.hair_example_5,
+            R.drawable.hair_example_6,
+            R.drawable.hair_example_7,
+            R.drawable.hair_example_8,
+            R.drawable.hair_example_9,
+            R.drawable.hair_example_10,
+            R.drawable.hair_example_11,
+            R.drawable.hair_example_12
+    )
 
 
     private var listOfHairs = ArrayList<Hair>()
@@ -44,7 +57,6 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         setupView()
         retrieveExtras()
 
-        hairs = arrayListOf("hair_example_1.jpg", "hair_example_2.jpg", "hair_example_3.jpg", "hair_example_4.jpg", "hair_example_5.jpg", "hair_example_6.jpg")
         println("hairs = $hairs")
 
         for (i in 0 until hairs.size) {
@@ -52,6 +64,8 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
             listOfHairs.add(Hair("Image #$i", hairs[i]))
         }
 
+
+        println("listOfHairs=$listOfHairs")
 
         rvHairs = findViewById(R.id.recyclerHairs)
         rvHairs.layoutManager = GridLayoutManager(this, 3)
