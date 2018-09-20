@@ -1,5 +1,6 @@
 package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.daily
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.RectF
 import android.os.Bundle
@@ -13,7 +14,10 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedReque
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
+import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.notifyAboutNewRequest
 import io.paperdb.Paper
+import java.text.DateFormatSymbols
+import java.text.SimpleDateFormat
 import java.util.*
 
 open class DailyActivity : AppCompatActivity(), BarberExtras,
@@ -64,11 +68,6 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
         mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener {
             //Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
-        }
-
-        mWeekView.emptyViewLongPressListener = WeekView.EmptyViewLongPressListener {
-            //Toast.makeText(this, "Long Tap: ${it.time}", Toast.LENGTH_SHORT).show()
-            //val et = CustomUI.createEditText(ctx, null, R.string.edit_text_hint)
             it.set(it.get(Calendar.YEAR),
                     it.get(Calendar.MONTH),
                     it.get(Calendar.DAY_OF_MONTH),
@@ -84,20 +83,37 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                     R.string.button_confirm,
                     R.string.button_cancel, null) {
 
-                val incomingList: List<IncomingRequest> = arrayListOf(IncomingRequest(
+                val incomingRequest = IncomingRequest(
                         name = getRandomName(Random().nextInt(10)),
                         regDay = it,
                         startHour = it.get(Calendar.HOUR_OF_DAY),
-                        endHour = it.get(Calendar.HOUR_OF_DAY) + 1
-                ))
+                        endHour = it.get(Calendar.HOUR_OF_DAY) + 1)
+
+                val incomingList: List<IncomingRequest> = arrayListOf(incomingRequest)
 
                 Paper.book().write(PaperConst.incomingList, incomingList)
+                val notifText = generateNotificationText(incomingRequest)
 
+                notifyAboutNewRequest(text = notifText)
 
             }
         }
 
+        mWeekView.emptyViewLongPressListener = WeekView.EmptyViewLongPressListener {
+            //Toast.makeText(this, "Long Tap: ${it.time}", Toast.LENGTH_SHORT).show()
+            //val et = CustomUI.createEditText(ctx, null, R.string.edit_text_hint)
+        }
 
+
+    }
+
+    // val month = SimpleDateFormat("MMM").format(item.regDay.time)
+    @SuppressLint("SimpleDateFormat")
+    private fun generateNotificationText(it: IncomingRequest): String {
+        return "${it.name} on ${DateFormatSymbols().months[it.regDay.get(Calendar.MONTH)]} " +
+                "${it.regDay.get(Calendar.DAY_OF_MONTH)}th " +
+                "from ${it.regDay.get(Calendar.HOUR_OF_DAY)}:${it.regDay.get(Calendar.MINUTE)}0 " +
+                "till ${it.regDay.get(Calendar.HOUR_OF_DAY) +1 }:${it.regDay.get(Calendar.MINUTE)}0"
     }
 
     private fun getMockEvents(): MutableList<out WeekViewEvent> {

@@ -8,7 +8,7 @@ import android.os.Build
 import android.support.v4.app.NotificationCompat
 
 @TargetApi(Build.VERSION_CODES.N)
-fun Context.notifySecPass(test: String) {
+fun Context.notifyAboutNewRequest(text: String) {
     val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     val notificationId = 1
@@ -24,9 +24,9 @@ fun Context.notifySecPass(test: String) {
 
     val mBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(android.R.mipmap.sym_def_app_icon)
-            .setContentTitle("Hands Up!")
+            .setContentTitle("New incoming request!")
             .setDefaults(Notification.DEFAULT_SOUND)
-            .setContentText(test)
+            .setContentText(text)
 
     val stackBuilder = TaskStackBuilder.create(this)
     stackBuilder.addNextIntent(Intent())

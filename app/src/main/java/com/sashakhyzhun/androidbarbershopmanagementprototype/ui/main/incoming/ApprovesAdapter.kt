@@ -11,6 +11,7 @@ import android.widget.TextView
 
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
+import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,13 +34,13 @@ internal class ApprovesAdapter(
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val item = list[position]
-        val month = SimpleDateFormat("MMM").format(item.regDay.time) //item.regDay.get(Calendar.MONTH)
+        val month = DateFormatSymbols().months[item.regDay.get(Calendar.MONTH)]
         val day = item.regDay.get(Calendar.DAY_OF_MONTH)
         val hours = "from " + item.startHour + " till " + item.endHour
 
         // holder.userImage =
         holder.mainText.text = item.name
-        holder.subText.text = "Incoming request on $day'th $month $hours"
+        holder.subText.text = "Incoming request on $month ${day}th $hours"
     }
 
     override fun getItemCount(): Int = list.size
