@@ -112,9 +112,11 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp">
+            android:paddingBottom="4dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="2dp">
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -125,30 +127,31 @@
 
                 <ImageView
                     android:id="@+id/image_incoming"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     />
 
                 <TextView
                     android:id="@+id/mainText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:layout_marginStart="4dp"
                     android:layout_toEndOf="@+id/image_incoming"
                     android:maxLines="1"
-                    android:text="No Calls Found"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="Row 1" />
 
                 <TextView
                     android:id="@+id/subText"
-                    android:layout_width="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/mainText"
                     android:layout_toEndOf="@+id/image_incoming"
                     android:maxLines="1"
-                    tools:text="Some text ..." />
+                    />
             </RelativeLayout>
 
         </LinearLayout>
@@ -156,9 +159,11 @@
     </LinearLayout>
 
     <View
+        android:layout_marginTop="4dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="#67676767"
-        android:elevation="5dp"/>
+        android:background="#dadada"
+        android:elevation="4dp"
+        />
 </RelativeLayout>

@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
@@ -41,6 +43,8 @@ internal class ApprovesAdapter(
         // holder.userImage =
         holder.mainText.text = item.name
         holder.subText.text = "Incoming request on $month ${day}th $hours"
+
+        Glide.with(ctx).load(R.drawable.long_hair).apply(RequestOptions().circleCrop()).into(holder.userImage)
     }
 
     override fun getItemCount(): Int = list.size

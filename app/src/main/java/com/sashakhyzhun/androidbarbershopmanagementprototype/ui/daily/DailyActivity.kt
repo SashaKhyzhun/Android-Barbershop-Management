@@ -86,7 +86,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                     R.string.button_cancel, null) {
 
                 val incomingRequest = IncomingRequest(
-                        name = getRandomName(Random().nextInt(10)),
+                        name = getRandomName(Random().nextInt(5)),
                         regDay = it,
                         startHour = it.get(Calendar.HOUR_OF_DAY),
                         endHour = it.get(Calendar.HOUR_OF_DAY) + 1)
@@ -190,14 +190,9 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         return when (i) {
             0 -> "Michal"
             1 -> "Bob"
-            2 -> "Sarah"
-            3 -> "David"
-            4 -> "Jennifer"
-            5 -> "Liza"
-            6 -> "Mike"
-            7 -> "Andrew"
-            8 -> "Jessica"
-            9 -> "Olivia"
+            2 -> "David"
+            3 -> "Mike"
+            4 -> "Andrew"
             else -> ""
         }
     }
