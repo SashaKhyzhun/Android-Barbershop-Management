@@ -61,7 +61,9 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_barber_profile)
+
         retrieveExtras()
+
         setupView()
 
         println("hairs = $hairs")
@@ -93,6 +95,7 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun setupView() {
         val background = findViewById<RelativeLayout>(R.id.layout_background)
         background.backgroundDrawable = applicationContext.getDrawable(R.drawable.background)
@@ -117,12 +120,7 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         tvCalendar.setOnClickListener {
             startActivity(Intent(this, MonthlyActivity::class.java))
         }
-    }
 
-    @SuppressLint("SetTextI18n")
-    private fun retrieveExtras() {
-        barber = intent?.extras?.getParcelable(barberKey)
-                ?: Barber(0, "", "", "", "", "")
         try {
             //tvImage. = barber.profileImage
             tvName.text = barber.name
@@ -134,6 +132,11 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
+    }
+
+    private fun retrieveExtras() {
+        barber = intent?.extras?.getParcelable(barberKey)
+                ?: Barber(0, "", "", "", "", "")
     }
 
 

@@ -6,9 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.support.v4.app.NotificationCompat
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.MainActivity
 
 @TargetApi(Build.VERSION_CODES.N)
-fun Context.notifyAboutNewRequest(text: String) {
+fun Context.notifyAboutNewRequest(text: String, extraKey: String) {
     val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     val notificationId = 1
@@ -29,7 +30,11 @@ fun Context.notifyAboutNewRequest(text: String) {
             .setContentText(text)
 
     val stackBuilder = TaskStackBuilder.create(this)
-    stackBuilder.addNextIntent(Intent())
+
+    val intent = Intent(this, MainActivity::class.java)
+    intent.putExtra(extraKey, true)
+
+    stackBuilder.addNextIntent(intent)
     val resultPendingIntent = stackBuilder.getPendingIntent(
             0,
             PendingIntent.FLAG_UPDATE_CURRENT

@@ -13,6 +13,7 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperConst
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.NotificationActions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.notifyAboutNewRequest
 import io.paperdb.Paper
@@ -21,7 +22,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 open class DailyActivity : AppCompatActivity(), BarberExtras,
-    WeekView.EventClickListener, WeekView.EventLongPressListener {
+        WeekView.EventClickListener,
+        WeekView.EventLongPressListener,
+        NotificationActions {
 
     private lateinit var extraDate: Date
     private lateinit var calendar: Calendar
@@ -60,12 +63,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
             // Populate the week view with some events.
             if (extraIsFreeDay.not()) getMockEvents() else getAcceptedEvents()
         }
-
         // Notify this shit about updates
         mWeekView.notifyDatasetChanged()
         // Set long press listener for events.
         mWeekView.eventLongPressListener = this
-
+        // Set on click listener for events
         mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener {
             //Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
             it.set(it.get(Calendar.YEAR),
@@ -94,11 +96,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                 Paper.book().write(PaperConst.incomingList, incomingList)
                 val notifText = generateNotificationText(incomingRequest)
 
-                notifyAboutNewRequest(text = notifText)
+                notifyAboutNewRequest(text = notifText, extraKey = notificationAction)
 
             }
         }
-
+        // Set on long click for empty view
         mWeekView.emptyViewLongPressListener = WeekView.EmptyViewLongPressListener {
             //Toast.makeText(this, "Long Tap: ${it.time}", Toast.LENGTH_SHORT).show()
             //val et = CustomUI.createEditText(ctx, null, R.string.edit_text_hint)
