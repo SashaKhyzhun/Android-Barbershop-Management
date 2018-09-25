@@ -61,7 +61,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // month every time the month changes on the week view.
         mWeekView.monthChangeListener = MonthLoader.MonthChangeListener { _, _ ->
             // Populate the week view with some events.
-            if (extraIsFreeDay.not()) getMockEvents() else getAcceptedEvents()
+            if (extraIsFreeDay.not()) {
+                getMockEvents()
+            } else {
+                getAcceptedEvents()
+            }
         }
         // Notify this shit about updates
         mWeekView.notifyDatasetChanged()
@@ -127,41 +131,44 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
         var end = Calendar.getInstance()
         end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 2, 0, 0)
+                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
 
-        weekViewList.add(WeekViewEvent(1, "haircut session #1", start, end))
-
-
-        start = Calendar.getInstance()
-        start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 11, 5, 0)
-
-        end = Calendar.getInstance()
-        end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 2, 0, 0)
-
-        weekViewList.add(WeekViewEvent(2, "haircut session #2", start, end))
+        weekViewList.add(WeekViewEvent(1, "Antonio", start, end))
 
 
         start = Calendar.getInstance()
         start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 13, 5, 0)
+                calendar.get(Calendar.DAY_OF_MONTH), 11, 0, 0)
 
         end = Calendar.getInstance()
         end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 2, 0, 0)
+                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
 
-        weekViewList.add(WeekViewEvent(3, "haircut session #3", start, end))
+        weekViewList.add(WeekViewEvent(2, "Michal", start, end))
+
 
         start = Calendar.getInstance()
         start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 15, 5, 0)
+                calendar.get(Calendar.DAY_OF_MONTH), 13, 0, 0)
 
         end = Calendar.getInstance()
         end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 2, 0, 0)
+                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
 
-        weekViewList.add(WeekViewEvent(4, "haircut session #4", start, end))
+        weekViewList.add(WeekViewEvent(3, "Alex", start, end))
+
+        start = Calendar.getInstance()
+        start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH), 15, 0, 0)
+
+        end = Calendar.getInstance()
+        end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
+
+        weekViewList.add(WeekViewEvent(4, "Joe", start, end))
+
+
+        weekViewList.addAll(getAcceptedEvents())
 
         return weekViewList
     }

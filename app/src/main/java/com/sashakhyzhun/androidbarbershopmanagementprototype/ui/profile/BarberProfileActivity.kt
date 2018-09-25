@@ -98,7 +98,7 @@ class BarberProfileActivity : AppCompatActivity(), BarberExtras {
     @SuppressLint("SetTextI18n")
     private fun setupView() {
         val background = findViewById<RelativeLayout>(R.id.layout_background)
-        background.backgroundDrawable = applicationContext.getDrawable(R.drawable.background)
+        background.background = applicationContext.getDrawable(R.drawable.background)
 
         tvImage = findViewById<ImageView>(R.id.profile_image)
         Glide.with(this).load(barber.profileImage).apply(RequestOptions().circleCrop()).into(tvImage)
