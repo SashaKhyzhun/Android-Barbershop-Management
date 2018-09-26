@@ -53,7 +53,7 @@ class BarbersFragment : Fragment(), BarbersOnClick, BarberExtras {
         add(Barber(R.drawable.barber_3, "Robert Hunter", "RobertGHunter@rhyta.com", "419-458-0192", "Male", "26"))
         add(Barber(R.drawable.barber_2, "James Allford", "JamesAllford@gmail.com", "209-388-0335", "Male", "24"))
         add(Barber(R.drawable.barber_1, "Jame M. Briscoe", "JameMBriscoe@armyspy.com", "612-668-7559", "Male", "30"))
-        add(Barber(R.drawable.barber_4, "Scott Bush", "Scott Bush@dayrep.com", "276-773-6988", "Male", "31"))
+        add(Barber(R.drawable.barber_4, "Scott Bush", "ScottBush@dayrep.com", "276-773-6988", "Male", "31"))
     }
 
 

@@ -30,18 +30,22 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
     private lateinit var calendar: Calendar
     private lateinit var mWeekView: WeekView
     private lateinit var ctx: Context
+    private lateinit var dfExtraDate: String
     private var extraIsFreeDay: Boolean = false
 
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily)
         ctx = this
-
         extraDate = intent?.extras?.get(dateKey) as Date
         extraIsFreeDay = intent?.extras?.get(freeDayKey) as Boolean
+
+        dfExtraDate = SimpleDateFormat("EEEE, MMMM d, yyyy").format(extraDate)
         println("extraDate=$extraDate")
         println("extraIsFreeDay=$extraIsFreeDay")
+        println("dfExtraDate=$dfExtraDate")
 
         // Initiate calendar
         calendar = Calendar.getInstance()
@@ -61,7 +65,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // month every time the month changes on the week view.
         mWeekView.monthChangeListener = MonthLoader.MonthChangeListener { _, _ ->
             // Populate the week view with some events.
-            if (extraIsFreeDay.not()) {
+            if (extraIsFreeDay.not()) { // if it's not "5th, 10th, 15th, 20th, 25th or 30th" day
                 getMockEvents()
             } else {
                 getAcceptedEvents()
@@ -168,15 +172,17 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         weekViewList.add(WeekViewEvent(4, "Joe", start, end))
 
 
-        weekViewList.addAll(getAcceptedEvents())
+        //weekViewList.addAll(getAcceptedEvents())
 
         return weekViewList
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun getAcceptedEvents(): MutableList<out WeekViewEvent> {
         val weekViewList: MutableList<WeekViewEvent > = mutableListOf()
         val saved: List<AcceptedRequest> = Paper.book().read(PaperConst.acceptedList, arrayListOf())
         println("saved size: ${saved.size}")
+
         saved.forEachIndexed { index, it ->
             val start = Calendar.getInstance()
             start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
@@ -187,7 +193,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                     calendar.get(Calendar.DAY_OF_MONTH), it.endHour, 0, 0)
 
 
-            weekViewList.add((WeekViewEvent(index + 4L, it.name, start, end)))
+            val df = SimpleDateFormat("EEEE, MMMM d, yyyy").format(it.regDay.time)
+
+            if (dfExtraDate == df) {
+                weekViewList.add((WeekViewEvent(index + 4L, it.name, start, end)))
+            }
         }
 
         return weekViewList
