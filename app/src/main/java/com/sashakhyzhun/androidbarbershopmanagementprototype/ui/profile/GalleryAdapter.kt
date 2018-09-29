@@ -32,8 +32,10 @@ class GalleryAdapter constructor(
     override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Glide.with(ctx).load(data[position].resId)
-                .thumbnail(0.5f)
+        Glide.with(ctx)
+                .load(data[position].resId)
+                //.apply(RequestOptions().optionalCenterCrop())
+                .apply(RequestOptions().fitCenter())
                 .into((holder as HairItemHolder).hairImage)
     }
 
