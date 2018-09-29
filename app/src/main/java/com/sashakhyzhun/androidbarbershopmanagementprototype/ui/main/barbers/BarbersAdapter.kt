@@ -47,9 +47,9 @@ class BarbersAdapter(
 
     class BarbersVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageProfile: ImageView = itemView.findViewById(R.id.item_barber_profile_image)
-        val mainText: TextView = itemView.findViewById(R.id.item_barber_name)
-        val subText: TextView = itemView.findViewById(R.id.item_barber_text3)
-        val barberLayout: RelativeLayout = itemView.findViewById(R.id.item_barber_layout)
+        val mainText: TextView = itemView.findViewById(R.id.item_accepted_name)
+        val subText: TextView = itemView.findViewById(R.id.item_accepted_subtext)
+        val barberLayout: RelativeLayout = itemView.findViewById(R.id.item_accepted_layout)
     }
 
 

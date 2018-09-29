@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvIncomingRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Incoming requests"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:background="#7dd6d6d6"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewRequests"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewRequests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvAcceptedRequests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Accepted requests"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:background="#7dd6d6d6"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewRequests"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewAccepted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="4dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/tvAcceptedRequests"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</LinearLayout>

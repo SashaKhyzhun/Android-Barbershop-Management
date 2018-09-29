@@ -1,7 +1,6 @@
 package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -13,10 +12,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.NotificationActions
-import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.incoming.ApprovesFragmentJava
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.incoming.ApprovesFragment
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.barbers.BarbersFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity(),
         BottomNavigationView.OnNavigationItemSelectedListener,
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity(),
         if (isNotifAction.not()) {
             handleFragmentLoading(BarbersFragment())
         } else {
-            handleFragmentLoading(ApprovesFragmentJava())
+            handleFragmentLoading(ApprovesFragment())
             navigation.menu.findItem(R.id.navigation_approves).isChecked = true
         }
 
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_barbers -> { selectedFragment = BarbersFragment() }
-            R.id.navigation_approves -> { selectedFragment = ApprovesFragmentJava() }
+            R.id.navigation_approves -> { selectedFragment = ApprovesFragment() }
         }
 
         handleFragmentLoading(selectedFragment)

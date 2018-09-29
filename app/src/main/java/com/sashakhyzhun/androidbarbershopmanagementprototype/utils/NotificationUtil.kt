@@ -27,6 +27,7 @@ fun Context.notifyAboutNewRequest(text: String, extraKey: String) {
             .setSmallIcon(android.R.mipmap.sym_def_app_icon)
             .setContentTitle("New incoming request!")
             .setDefaults(Notification.DEFAULT_SOUND)
+            .setAutoCancel(true)
             .setContentText(text)
 
     val stackBuilder = TaskStackBuilder.create(this)

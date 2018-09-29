@@ -7,52 +7,47 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
-import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
 import java.text.DateFormatSymbols
-import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * @author SashaKhyzhun
- * Created on 9/14/18.
- */
-internal class ApprovesAdapter(
+internal class AcceptedAdapter(
         private val ctx: Context,
-        private val list: List<IncomingRequest>
-) : RecyclerView.Adapter<ApprovesAdapter.MainViewHolder>() {
+        private val users: List<AcceptedRequest>
+) : RecyclerView.Adapter<AcceptedAdapter.MainViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         return MainViewHolder(LayoutInflater
                 .from(ctx)
-                .inflate(R.layout.item_request, parent, false))
+                .inflate(R.layout.item_accepted, parent, false))
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val item = list[position]
+        val item = users[position]
         val month = DateFormatSymbols().months[item.regDay.get(Calendar.MONTH)]
         val day = item.regDay.get(Calendar.DAY_OF_MONTH)
         val hours = "from " + item.startHour + " till " + item.endHour
 
-        // holder.userImage =
+
         holder.mainText.text = item.name
-        holder.subText.text = "Incoming request on $month ${day}th $hours"
+        holder.subText.text = "Accepted request on $month ${day}th $hours"
 
         Glide.with(ctx).load(R.drawable.long_hair).apply(RequestOptions().circleCrop()).into(holder.userImage)
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = users.size
 
 
     internal inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val userImage: ImageView = itemView.findViewById(R.id.image_incoming)
-        val mainText: TextView = itemView.findViewById(R.id.mainText)
-        val subText: TextView = itemView.findViewById(R.id.subText)
+        val userImage: ImageView = itemView.findViewById(R.id.item_barber_profile_image)
+        val mainText: TextView = itemView.findViewById(R.id.item_accepted_name)
+        val subText: TextView = itemView.findViewById(R.id.item_accepted_subtext)
     }
 }
