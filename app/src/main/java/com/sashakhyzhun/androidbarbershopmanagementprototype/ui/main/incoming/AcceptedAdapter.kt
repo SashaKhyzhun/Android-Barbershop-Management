@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getImage
 import java.text.DateFormatSymbols
 import java.util.*
 
@@ -39,7 +39,10 @@ internal class AcceptedAdapter(
         holder.mainText.text = item.name
         holder.subText.text = "Accepted request on $month ${day}th $hours"
 
-        Glide.with(ctx).load(R.drawable.long_hair).apply(RequestOptions().circleCrop()).into(holder.userImage)
+        Glide.with(ctx)
+                .load(getImage(position))
+                .apply(RequestOptions().circleCrop())
+                .into(holder.userImage)
     }
 
     override fun getItemCount(): Int = users.size

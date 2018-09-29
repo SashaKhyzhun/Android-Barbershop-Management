@@ -15,6 +15,7 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingReque
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.NotificationActions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
+import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getName
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.notifyAboutNewRequest
 import io.paperdb.Paper
 import java.text.DateFormatSymbols
@@ -94,7 +95,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                     R.string.button_cancel, null) {
 
                 val incomingRequest = IncomingRequest(
-                        name = getRandomName(Random().nextInt(5)),
+                        name = getName(Random().nextInt(16)),
                         regDay = it,
                         startHour = it.get(Calendar.HOUR_OF_DAY),
                         endHour = it.get(Calendar.HOUR_OF_DAY) + 1)
@@ -203,16 +204,6 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         return weekViewList
     }
 
-    private fun getRandomName(i: Int): String {
-        return when (i) {
-            0 -> "Michal"
-            1 -> "Bob"
-            2 -> "David"
-            3 -> "Mike"
-            4 -> "Andrew"
-            else -> ""
-        }
-    }
 
 
     override fun onEventClick(event: WeekViewEvent?, eventRect: RectF?) {
