@@ -19,6 +19,7 @@
         app:dayNameLength="length_long"
         app:noOfVisibleDays="1"
         app:headerRowBackgroundColor="#ffefefef"
+        app:pastBackgroundColor="#696969"
         app:dayBackgroundColor="#05000000"
         app:todayBackgroundColor="#1848adff"
         app:headerColumnBackground="#ffffffff"/>

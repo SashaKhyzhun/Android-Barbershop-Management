@@ -15,6 +15,7 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingReque
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.NotificationActions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
+import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getMockEvents
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getName
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.notifyAboutNewRequest
 import io.paperdb.Paper
@@ -42,6 +43,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         ctx = this
         extraDate = intent?.extras?.get(dateKey) as Date
         extraIsFreeDay = intent?.extras?.get(freeDayKey) as Boolean
+        val now = System.currentTimeMillis()
 
         dfExtraDate = SimpleDateFormat("EEEE, MMMM d, yyyy").format(extraDate)
         println("extraDate=$extraDate")
@@ -67,7 +69,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         mWeekView.monthChangeListener = MonthLoader.MonthChangeListener { _, _ ->
             // Populate the week view with some events.
             if (extraIsFreeDay.not()) { // if it's not "5th, 10th, 15th, 20th, 25th or 30th" day
-                getMockEvents()
+                getMockEvents(calendar)
             } else {
                 getAcceptedEvents()
             }
@@ -77,38 +79,44 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // Set long press listener for events.
         mWeekView.eventLongPressListener = this
         // Set on click listener for events
-        mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener {
-            //Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
-            it.set(it.get(Calendar.YEAR),
-                    it.get(Calendar.MONTH),
-                    it.get(Calendar.DAY_OF_MONTH),
-                    it.get(Calendar.HOUR_OF_DAY),
-                    0,
-                    0
-            )
-            CustomUI.createAlertDialog(ctx,
-                    R.string.dialog_title,
-                    "Confirm registration from "
-                            + "${it.get(Calendar.HOUR_OF_DAY)}:${it.get(Calendar.MINUTE)}0 till "
-                            + "${it.get(Calendar.HOUR_OF_DAY) +1 }:${it.get(Calendar.MINUTE)}0",
-                    R.string.button_confirm,
-                    R.string.button_cancel, null) {
 
-                val incomingRequest = IncomingRequest(
-                        name = getName(Random().nextInt(16)),
-                        regDay = it,
-                        startHour = it.get(Calendar.HOUR_OF_DAY),
-                        endHour = it.get(Calendar.HOUR_OF_DAY) + 1)
+        if (extraIsFreeDay && calendar.time.time >= now) {
+            mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener {
+                //Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
+                it.set(it.get(Calendar.YEAR),
+                        it.get(Calendar.MONTH),
+                        it.get(Calendar.DAY_OF_MONTH),
+                        it.get(Calendar.HOUR_OF_DAY),
+                        0,
+                        0
+                )
+                CustomUI.createAlertDialog(ctx,
+                        R.string.dialog_title,
+                        "Confirm registration from "
+                                + "${it.get(Calendar.HOUR_OF_DAY)}:${it.get(Calendar.MINUTE)}0 till "
+                                + "${it.get(Calendar.HOUR_OF_DAY) + 1}:${it.get(Calendar.MINUTE)}0",
+                        R.string.button_confirm,
+                        R.string.button_cancel, null) {
 
-                val incomingList: List<IncomingRequest> = arrayListOf(incomingRequest)
+                    val incomingRequest = IncomingRequest(
+                            name = getName(Random().nextInt(16)),
+                            regDay = it,
+                            startHour = it.get(Calendar.HOUR_OF_DAY),
+                            endHour = it.get(Calendar.HOUR_OF_DAY) + 1)
 
-                Paper.book().write(PaperConst.incomingList, incomingList)
-                val notifText = generateNotificationText(incomingRequest)
+                    val incomingList: List<IncomingRequest> = arrayListOf(incomingRequest)
 
-                notifyAboutNewRequest(text = notifText, extraKey = notificationAction)
+                    Paper.book().write(PaperConst.incomingList, incomingList)
+                    val notifText = generateNotificationText(incomingRequest)
 
+                    notifyAboutNewRequest(text = notifText, extraKey = notificationAction)
+
+                }
             }
+        } else {
+            mWeekView.setBackgroundResource(R.color.week_view_bg)
         }
+
         // Set on long click for empty view
         mWeekView.emptyViewLongPressListener = WeekView.EmptyViewLongPressListener {
             //Toast.makeText(this, "Long Tap: ${it.time}", Toast.LENGTH_SHORT).show()
@@ -116,7 +124,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         }
 
 
+
     }
+
+
+
 
     // val month = SimpleDateFormat("MMM").format(item.regDay.time)
     @SuppressLint("SimpleDateFormat")
@@ -127,56 +139,6 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                 "till ${it.regDay.get(Calendar.HOUR_OF_DAY) +1 }:${it.regDay.get(Calendar.MINUTE)}0"
     }
 
-    private fun getMockEvents(): MutableList<out WeekViewEvent> {
-        val weekViewList: MutableList<WeekViewEvent > = mutableListOf()
-
-        var start = Calendar.getInstance()
-        start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 9, 0, 0)
-
-        var end = Calendar.getInstance()
-        end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
-
-        weekViewList.add(WeekViewEvent(1, "Antonio", start, end))
-
-
-        start = Calendar.getInstance()
-        start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 11, 0, 0)
-
-        end = Calendar.getInstance()
-        end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
-
-        weekViewList.add(WeekViewEvent(2, "Michal", start, end))
-
-
-        start = Calendar.getInstance()
-        start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 13, 0, 0)
-
-        end = Calendar.getInstance()
-        end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
-
-        weekViewList.add(WeekViewEvent(3, "Alex", start, end))
-
-        start = Calendar.getInstance()
-        start.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), 15, 0, 0)
-
-        end = Calendar.getInstance()
-        end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH), start.get(Calendar.HOUR_OF_DAY) + 1, 0, 0)
-
-        weekViewList.add(WeekViewEvent(4, "Joe", start, end))
-
-
-        //weekViewList.addAll(getAcceptedEvents())
-
-        return weekViewList
-    }
 
     @SuppressLint("SimpleDateFormat")
     private fun getAcceptedEvents(): MutableList<out WeekViewEvent> {

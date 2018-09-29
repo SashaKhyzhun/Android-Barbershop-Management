@@ -16,4 +16,6 @@
     <color name="swipeoption_blue">#3693D0</color>
     <color name="swipeoption_purple">#ff1744</color>
 
+    <color name="week_view_bg">#dcdcdc</color>
+
 </resources>

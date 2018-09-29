@@ -58,7 +58,11 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
 
     private fun fillCalendar(monthlyData: ArrayList<Long>) {
         for (i in 0 until monthlyData.size) {
-            if (i == 4 || i == 9 || i == 14 || i == 19 || i == 24) { continue }
+            // 3, 6, 9, 12, 15, 18, 21, 24, 27, 30 - free days
+            if (i == 2 || i == 5 || i == 8 || i == 11 || i == 14 ||
+                i == 17 || i == 20 || i == 23 || i == 26 || i == 29) {
+                continue
+            }
             calendarView.markCircleImage1(Date(monthlyData[i]))
         }
     }
@@ -89,11 +93,13 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
     }
 
 
-    private fun isMultipleOfFive(date: Date): Boolean {
+    private fun isFreeDay(date: Date): Boolean {
         val cal = Calendar.getInstance()
         cal.time = date //val year = cal.get(Calendar.YEAR); val month = cal.get(Calendar.MONTH)
         val day = cal.get(Calendar.DAY_OF_MONTH)
-        return (day == 5 || day == 10 || day == 15 || day == 20 || day == 25)
+        println("selected day is: $day")
+        return (day == 3 || day == 6 || day == 9 || day == 12 || day == 15 ||
+                day == 18 || day == 21 || day == 24 || day == 27 || day == 30)
     }
 
 
@@ -105,7 +111,7 @@ class MonthlyActivity : AppCompatActivity(), BarberExtras, RobotoCalendarView.Ro
     override fun onDayClick(date: Date) {
         val intent = Intent(this, DailyActivity::class.java)
         intent.putExtra(dateKey, date)
-        intent.putExtra(freeDayKey, isMultipleOfFive(date))
+        intent.putExtra(freeDayKey, isFreeDay(date))
         startActivity(intent)
     }
 

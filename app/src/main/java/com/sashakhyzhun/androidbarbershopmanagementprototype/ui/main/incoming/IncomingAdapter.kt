@@ -45,7 +45,7 @@ internal class IncomingAdapter(
         holder.subText.text = "Incoming request on $month ${day}th $hours"
 
         Glide.with(ctx)
-                .load(getImage(position))
+                .load(getImage(Random().nextInt(5)))
                 .apply(RequestOptions().circleCrop())
                 .into(holder.userImage)
     }
