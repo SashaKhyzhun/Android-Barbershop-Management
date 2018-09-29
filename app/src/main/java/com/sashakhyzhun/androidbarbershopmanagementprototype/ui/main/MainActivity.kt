@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.NotificationActions
-import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.incoming.ApprovesFragment
+import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.requests.RequestsFragment
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.barbers.BarbersFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(),
         if (isNotifAction.not()) {
             handleFragmentLoading(BarbersFragment())
         } else {
-            handleFragmentLoading(ApprovesFragment())
+            handleFragmentLoading(RequestsFragment())
             navigation.menu.findItem(R.id.navigation_approves).isChecked = true
         }
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_barbers -> { selectedFragment = BarbersFragment() }
-            R.id.navigation_approves -> { selectedFragment = ApprovesFragment() }
+            R.id.navigation_approves -> { selectedFragment = RequestsFragment() }
         }
 
         handleFragmentLoading(selectedFragment)

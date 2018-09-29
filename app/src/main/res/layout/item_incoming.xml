@@ -18,7 +18,7 @@
             android:id="@+id/layout_cancel"
             android:layout_width="@dimen/swipeWidth"
             android:layout_height="match_parent"
-            android:background="@color/swipeoption_purple"
+            android:background="@color/swipe_option_purple"
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical">
@@ -57,7 +57,7 @@
             android:id="@+id/layout_accept"
             android:layout_width="@dimen/swipeWidth"
             android:layout_height="match_parent"
-            android:background="@color/swipeoption_green"
+            android:background="@color/swipe_option_green"
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical">

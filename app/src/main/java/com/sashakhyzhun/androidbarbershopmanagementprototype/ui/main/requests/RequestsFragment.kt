@@ -1,4 +1,4 @@
-package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.incoming
+package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.requests
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -22,9 +22,10 @@ import java.util.ArrayList
  * @author SashaKhyzhun
  * Created on 9/14/18.
  */
-class ApprovesFragment : Fragment() {
+class RequestsFragment : Fragment() {
 
-    private lateinit var onTouchListener: RecyclerTouchListener
+    private lateinit var onTouchIncomingListener: RecyclerTouchListener
+    private lateinit var onTouchAcceptedListener: RecyclerTouchListener
 
     private lateinit var tvIncomingRequests: TextView
     private lateinit var incoming: ArrayList<IncomingRequest>
@@ -62,11 +63,11 @@ class ApprovesFragment : Fragment() {
         loadAcceptedAdapter(view)
 
 
-        onTouchListener = RecyclerTouchListener(activity, recyclerIncoming)
-        onTouchListener
+        onTouchIncomingListener = RecyclerTouchListener(activity, recyclerIncoming)
+        onTouchIncomingListener
                 //.setIndependentViews(R.id.rowButton)
                 //.setViewsToFade(R.id.rowButton)
-                .setLongClickable(true) { position -> }
+                //.setLongClickable(true) { position -> }
                 .setSwipeOptionViews(R.id.layout_accept, R.id.layout_cancel)
                 .setSwipeable(R.id.rowFG, R.id.rowBG) { viewID, position ->
                     when (viewID) {
@@ -90,6 +91,25 @@ class ApprovesFragment : Fragment() {
                             incoming.removeAt(position)
                             Paper.book().write(PaperConst.incomingList, incoming)
                         }
+                    }
+                    // update list
+                    updateRV()
+                    updateTvIncoming(incoming)
+                    updateTvAccepted(accepted)
+                }
+
+        onTouchAcceptedListener = RecyclerTouchListener(activity, recyclerAccepted)
+        onTouchAcceptedListener
+                .setSwipeOptionViews(R.id.layout_delete, R.id.layout_reschedule, R.id.layout_call)
+                .setSwipeable(R.id.rowFG, R.id.rowBG) { viewID, position ->
+                    when (viewID) {
+                        R.id.layout_delete -> {
+                            acceptedList.removeAt(position)
+                            accepted.removeAt(position)
+                            Paper.book().write(PaperConst.acceptedList, accepted)
+                        }
+                        R.id.layout_reschedule -> { }
+                        R.id.layout_call -> { }
                     }
                     // update list
                     updateRV()
@@ -132,12 +152,14 @@ class ApprovesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        recyclerIncoming.addOnItemTouchListener(onTouchListener)
+        recyclerIncoming.addOnItemTouchListener(onTouchIncomingListener)
+        recyclerAccepted.addOnItemTouchListener(onTouchAcceptedListener)
     }
 
     override fun onPause() {
         super.onPause()
-        recyclerIncoming.removeOnItemTouchListener(onTouchListener)
+        recyclerIncoming.removeOnItemTouchListener(onTouchIncomingListener)
+        recyclerAccepted.removeOnItemTouchListener(onTouchAcceptedListener)
     }
 
 

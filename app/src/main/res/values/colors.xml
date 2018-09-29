@@ -12,9 +12,10 @@
     <color name="event_color_03">#87d288</color>
     <color name="event_color_04">#f8b552</color>
 
-    <color name="swipeoption_green">#36CF8E</color>
-    <color name="swipeoption_blue">#3693D0</color>
-    <color name="swipeoption_purple">#ff1744</color>
+    <color name="swipe_option_green">#36CF8E</color>
+    <color name="swipe_option_blue">#3693D0</color>
+    <color name="swipe_option_purple">#ff1744</color>
+    <color name="swipe_option_orange">#d9a710</color>
 
     <color name="week_view_bg">#dcdcdc</color>
 

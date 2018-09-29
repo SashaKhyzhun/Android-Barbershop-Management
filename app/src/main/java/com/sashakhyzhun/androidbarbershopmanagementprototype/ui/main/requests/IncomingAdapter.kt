@@ -1,4 +1,4 @@
-package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.incoming
+package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.main.requests
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,25 +7,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
-import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getImage
 import java.text.DateFormatSymbols
 import java.util.*
 
-internal class AcceptedAdapter(
+/**
+ * @author SashaKhyzhun
+ * Created on 9/14/18.
+ */
+internal class IncomingAdapter(
         private val ctx: Context,
-        private val users: List<AcceptedRequest>
-) : RecyclerView.Adapter<AcceptedAdapter.MainViewHolder>() {
+        private val users: List<IncomingRequest>
+) : RecyclerView.Adapter<IncomingAdapter.MainViewHolder>() {
 
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         return MainViewHolder(LayoutInflater
                 .from(ctx)
-                .inflate(R.layout.item_accepted, parent, false))
+                .inflate(R.layout.item_incoming, parent, false))
     }
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -35,12 +41,11 @@ internal class AcceptedAdapter(
         val day = item.regDay.get(Calendar.DAY_OF_MONTH)
         val hours = "from " + item.startHour + " till " + item.endHour
 
-
         holder.mainText.text = item.name
-        holder.subText.text = "Accepted request on $month ${day}th $hours"
+        holder.subText.text = "Incoming request on $month ${day}th $hours"
 
         Glide.with(ctx)
-                .load(getImage(position))
+                .load(getImage(Random().nextInt(5)))
                 .apply(RequestOptions().circleCrop())
                 .into(holder.userImage)
     }
@@ -49,8 +54,9 @@ internal class AcceptedAdapter(
 
 
     internal inner class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val userImage: ImageView = itemView.findViewById(R.id.item_barber_profile_image)
-        val mainText: TextView = itemView.findViewById(R.id.item_accepted_name)
-        val subText: TextView = itemView.findViewById(R.id.item_accepted_subtext)
+        val bg: LinearLayout = itemView.findViewById(R.id.rowFG)
+        val userImage: ImageView = itemView.findViewById(R.id.image_incoming)
+        val mainText: TextView = itemView.findViewById(R.id.mainText)
+        val subText: TextView = itemView.findViewById(R.id.subText)
     }
 }
