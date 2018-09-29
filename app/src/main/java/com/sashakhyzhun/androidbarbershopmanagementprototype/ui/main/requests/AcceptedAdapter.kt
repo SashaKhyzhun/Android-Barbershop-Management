@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
-import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getImage
 import java.text.DateFormatSymbols
 import java.util.*
 
@@ -40,7 +39,7 @@ internal class AcceptedAdapter(
         holder.subText.text = "Accepted request on $month ${day}th $hours"
 
         Glide.with(ctx)
-                .load(getImage(position))
+                .load(item.photo)
                 .apply(RequestOptions().circleCrop())
                 .into(holder.userImage)
     }

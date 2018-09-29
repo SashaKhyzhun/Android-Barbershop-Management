@@ -14,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions
 
 import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
-import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getImage
 import java.text.DateFormatSymbols
 import java.util.*
 
@@ -45,7 +44,7 @@ internal class IncomingAdapter(
         holder.subText.text = "Incoming request on $month ${day}th $hours"
 
         Glide.with(ctx)
-                .load(getImage(Random().nextInt(5)))
+                .load(item.photo)
                 .apply(RequestOptions().circleCrop())
                 .into(holder.userImage)
     }

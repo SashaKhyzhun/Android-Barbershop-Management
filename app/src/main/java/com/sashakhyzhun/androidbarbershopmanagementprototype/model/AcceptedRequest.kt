@@ -6,5 +6,6 @@ data class AcceptedRequest(
         val name: String,
         val regDay: Calendar,
         val startHour: Int,
-        val endHour: Int
+        val endHour: Int,
+        val photo: Int
 ) : User()

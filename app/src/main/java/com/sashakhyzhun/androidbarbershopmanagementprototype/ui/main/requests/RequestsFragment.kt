@@ -73,7 +73,7 @@ class RequestsFragment : Fragment() {
                     when (viewID) {
                         R.id.layout_accept -> {
                             val req = incoming[position]
-                            val newUser = AcceptedRequest(req.name, req.regDay, req.startHour, req.endHour)
+                            val newUser = AcceptedRequest(req.name, req.regDay, req.startHour, req.endHour, req.photo)
 
                             // add new user to accepted list
                             acceptedList.add(newUser)
@@ -107,14 +107,14 @@ class RequestsFragment : Fragment() {
                             acceptedList.removeAt(position)
                             accepted.removeAt(position)
                             Paper.book().write(PaperConst.acceptedList, accepted)
+
+                            updateRV()
+                            updateTvIncoming(incoming)
+                            updateTvAccepted(accepted)
                         }
                         R.id.layout_reschedule -> { }
                         R.id.layout_call -> { }
                     }
-                    // update list
-                    updateRV()
-                    updateTvIncoming(incoming)
-                    updateTvAccepted(accepted)
                 }
 
         return view

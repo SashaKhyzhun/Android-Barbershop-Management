@@ -12,11 +12,18 @@ fun getImage(n: Int): Int {
         3 -> R.drawable.long_hair1
         4 -> R.drawable.long_hair2
 
-        5 -> R.drawable.long_hair3
-        6 -> R.drawable.long_hair4
-        7 -> R.drawable.long_hair5
-        8 -> R.drawable.long_hair1
-        9 -> R.drawable.long_hair2
+        5 -> R.drawable.hair_example_1
+        6 -> R.drawable.hair_example_2
+        7 -> R.drawable.hair_example_3
+        8 -> R.drawable.hair_example_4
+        9 -> R.drawable.hair_example_5
+        10 -> R.drawable.hair_example_6
+        11 -> R.drawable.hair_example_7
+        12 -> R.drawable.hair_example_8
+        13 -> R.drawable.hair_example_9
+        14 -> R.drawable.hair_example_10
+        15 -> R.drawable.hair_example_11
+        16 -> R.drawable.hair_example_12
 
         else -> R.drawable.long_hair1
     }

@@ -14,10 +14,7 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedReque
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.BarberExtras
 import com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common.NotificationActions
-import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.CustomUI
-import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getMockEvents
-import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.getName
-import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.notifyAboutNewRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.*
 import io.paperdb.Paper
 import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
@@ -102,7 +99,8 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                             name = getName(Random().nextInt(16)),
                             regDay = it,
                             startHour = it.get(Calendar.HOUR_OF_DAY),
-                            endHour = it.get(Calendar.HOUR_OF_DAY) + 1)
+                            endHour = it.get(Calendar.HOUR_OF_DAY) + 1,
+                            photo = getImage(Random().nextInt(16)))
 
                     val incomingList: List<IncomingRequest> = arrayListOf(incomingRequest)
 
@@ -153,7 +151,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
 
             val end = Calendar.getInstance()
             end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH), it.endHour, 0, 0)
+                    calendar.get(Calendar.DAY_OF_MONTH), it.startHour, 58, 0)
 
 
             val df = SimpleDateFormat("EEEE, MMMM d, yyyy").format(it.regDay.time)
