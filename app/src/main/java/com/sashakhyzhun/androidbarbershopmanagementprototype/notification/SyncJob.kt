@@ -4,6 +4,7 @@ import com.evernote.android.job.Job
 import com.evernote.android.job.JobRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.utils.notify
 import java.util.*
+import com.evernote.android.job.JobManager
 
 
 class SyncJob : Job() {
@@ -24,7 +25,7 @@ class SyncJob : Job() {
         return Job.Result.SUCCESS
     }
 
-    fun scheduleJob(regTime: Calendar) {
+    fun scheduleJob(regTime: Calendar): Int {
         println("scheduleJob | regTime=$regTime")
 
         val calendar = Calendar.getInstance()
@@ -35,15 +36,14 @@ class SyncJob : Job() {
 
         println("scheduleJob | diff=$diff")
 
-        JobRequest.Builder(SyncJob.TAG)
+        return JobRequest.Builder(TAG)
                 .setExact(diff)
                 .build()
                 .schedule()
     }
 
-    fun cancelJob(regTime: Calendar) {
-
-
+    fun cancelJob(jobId: Int) {
+        JobManager.instance().cancel(jobId)
     }
 
 

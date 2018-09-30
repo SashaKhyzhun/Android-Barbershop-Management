@@ -73,7 +73,9 @@ class RequestsFragment : Fragment() {
                     when (viewID) {
                         R.id.layout_accept -> {
                             val req = incoming[position]
-                            val newUser = AcceptedRequest(req.name, req.regDay, req.startHour, req.endHour, req.photo)
+                            val jobId = SyncJob().scheduleJob(req.regDay)
+                            val newUser = AcceptedRequest(req.name, req.regDay,
+                                    req.startHour, req.endHour, req.photo, jobId)
 
                             // add new user to accepted list
                             acceptedList.add(newUser)
@@ -86,7 +88,6 @@ class RequestsFragment : Fragment() {
                             Paper.book().write(PaperConst.incomingList, incoming)
 
 
-                            SyncJob().scheduleJob(req.regDay)
 
                         }
                         R.id.layout_cancel -> {
@@ -108,6 +109,8 @@ class RequestsFragment : Fragment() {
                 .setSwipeable(R.id.rowFG, R.id.rowBG) { viewID, position ->
                     when (viewID) {
                         R.id.layout_delete -> {
+                            SyncJob().cancelJob(accepted[position].jobId)
+
                             acceptedList.removeAt(position)
                             accepted.removeAt(position)
                             Paper.book().write(PaperConst.acceptedList, accepted)

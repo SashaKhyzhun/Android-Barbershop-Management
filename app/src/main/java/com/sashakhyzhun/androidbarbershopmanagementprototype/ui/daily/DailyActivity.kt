@@ -154,7 +154,6 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
             end.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH), it.startHour, 58, 0)
 
-
             val df = SimpleDateFormat("EEEE, MMMM d, yyyy").format(it.regDay.time)
 
             if (dfExtraDate == df) {
