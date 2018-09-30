@@ -78,28 +78,29 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
         // Set on click listener for events
 
         if (extraIsFreeDay && calendar.time.time >= now) {
-            mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener {
+
+            mWeekView.emptyViewClickListener = WeekView.EmptyViewClickListener { cal ->
                 //Toast.makeText(this, "Tap: ${it.time}", Toast.LENGTH_SHORT).show()
-                it.set(it.get(Calendar.YEAR),
-                        it.get(Calendar.MONTH),
-                        it.get(Calendar.DAY_OF_MONTH),
-                        it.get(Calendar.HOUR_OF_DAY),
+                cal.set(cal.get(Calendar.YEAR),
+                        cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH),
+                        cal.get(Calendar.HOUR_OF_DAY),
                         0,
-                        0
-                )
+                        0)
+
                 CustomUI.createAlertDialog(ctx,
                         R.string.dialog_title,
                         "Confirm registration from "
-                                + "${it.get(Calendar.HOUR_OF_DAY)}:${it.get(Calendar.MINUTE)}0 till "
-                                + "${it.get(Calendar.HOUR_OF_DAY) + 1}:${it.get(Calendar.MINUTE)}0",
+                                + "${cal.get(Calendar.HOUR_OF_DAY)}:${cal.get(Calendar.MINUTE)}0 till "
+                                + "${cal.get(Calendar.HOUR_OF_DAY) + 1}:${cal.get(Calendar.MINUTE)}0",
                         R.string.button_confirm,
                         R.string.button_cancel, null) {
 
                     val incomingRequest = IncomingRequest(
                             name = getName(Random().nextInt(16)),
-                            regDay = it,
-                            startHour = it.get(Calendar.HOUR_OF_DAY),
-                            endHour = it.get(Calendar.HOUR_OF_DAY) + 1,
+                            regDay = cal,
+                            startHour = cal.get(Calendar.HOUR_OF_DAY),
+                            endHour = cal.get(Calendar.HOUR_OF_DAY) + 1,
                             photo = getImage(Random().nextInt(16)))
 
                     val incomingList: List<IncomingRequest> = arrayListOf(incomingRequest)
@@ -107,7 +108,7 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                     Paper.book().write(PaperConst.incomingList, incomingList)
                     val notifText = generateNotificationText(incomingRequest)
 
-                    notifyAboutNewRequest(text = notifText, extraKey = notificationAction)
+                    notify(text = notifText, extraKey = notificationAction)
 
                 }
             }

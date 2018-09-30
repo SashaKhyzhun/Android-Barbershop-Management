@@ -14,9 +14,9 @@ import com.sashakhyzhun.androidbarbershopmanagementprototype.R
 import com.sashakhyzhun.androidbarbershopmanagementprototype.data.PaperConst
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.AcceptedRequest
 import com.sashakhyzhun.androidbarbershopmanagementprototype.model.IncomingRequest
+import com.sashakhyzhun.androidbarbershopmanagementprototype.notification.SyncJob
 import io.paperdb.Paper
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * @author SashaKhyzhun
@@ -84,6 +84,10 @@ class RequestsFragment : Fragment() {
                             incomingList.removeAt(position)
                             incoming.removeAt(position)
                             Paper.book().write(PaperConst.incomingList, incoming)
+
+
+                            SyncJob().scheduleJob(req.regDay)
+
                         }
                         R.id.layout_cancel -> {
                             // remove user from incoming

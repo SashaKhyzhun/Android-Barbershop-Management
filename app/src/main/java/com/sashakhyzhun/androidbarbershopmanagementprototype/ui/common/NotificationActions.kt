@@ -7,4 +7,5 @@ package com.sashakhyzhun.androidbarbershopmanagementprototype.ui.common
 interface NotificationActions {
 
     val notificationAction: String get() = "notificationAction"
+
 }
