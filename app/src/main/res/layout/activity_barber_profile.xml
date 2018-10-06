@@ -52,7 +52,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_weight="35"
+        android:layout_weight="70"
         android:layout_height="0dp"
         android:layout_width="match_parent"
         >
@@ -63,18 +63,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="8dp">
+            android:paddingTop="2dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/ic_email" />
 
             <TextView
                 android:id="@+id/tvEmail"
+                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -88,18 +89,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="4dp">
+            android:paddingTop="2dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/ic_phone" />
 
             <TextView
                 android:id="@+id/tvPhone"
+                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -113,18 +115,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="4dp">
+            android:paddingTop="2dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/ic_gender" />
 
             <TextView
                 android:id="@+id/tvSex"
+                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -138,18 +141,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="4dp">
+            android:paddingTop="2dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/ic_age" />
 
             <TextView
                 android:id="@+id/tvAge"
+                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -163,18 +167,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="4dp"
+            android:paddingBottom="2dp"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:paddingTop="4dp">
+            android:paddingTop="2dp">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/ic_calendar" />
 
             <TextView
                 android:id="@+id/tvCalendar"
+                android:textSize="12sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -182,26 +187,15 @@
                 android:text="Send request to Barber" />
         </LinearLayout>
 
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_weight="35"
-        android:layout_height="0dp"
-        android:layout_width="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerHairs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
     </LinearLayout>
-
-
-
-
-
-
 
 
 

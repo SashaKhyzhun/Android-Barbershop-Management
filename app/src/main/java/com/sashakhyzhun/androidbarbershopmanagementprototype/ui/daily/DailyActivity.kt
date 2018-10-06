@@ -97,11 +97,11 @@ open class DailyActivity : AppCompatActivity(), BarberExtras,
                         R.string.button_cancel, null) {
 
                     val incomingRequest = IncomingRequest(
-                            name = getName(Random().nextInt(16)),
+                            name = getName(Random().nextInt(15)),
                             regDay = cal,
                             startHour = cal.get(Calendar.HOUR_OF_DAY),
                             endHour = cal.get(Calendar.HOUR_OF_DAY) + 1,
-                            photo = getImage(Random().nextInt(16)))
+                            photo = getImage(Random().nextInt(15)))
 
                     val incomingList: List<IncomingRequest> = arrayListOf(incomingRequest)
 
